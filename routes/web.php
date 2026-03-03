@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('reelstack');
-});
+})->name('home');
+
+Route::view('/about-us', 'about')->name('about');
+Route::view('/privacy-policy', 'privacy')->name('privacy');
+Route::view('/terms-of-use', 'terms')->name('terms');

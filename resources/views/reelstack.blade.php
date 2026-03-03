@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,8 +38,8 @@
             font-family: "Plus Jakarta Sans", sans-serif;
             color: var(--text);
             background: radial-gradient(circle at 20% -10%, #163467 0%, transparent 45%),
-                        radial-gradient(circle at 80% 0%, #0f2d57 0%, transparent 42%),
-                        linear-gradient(180deg, var(--bg-1), var(--bg-0) 32%, #061121 100%);
+                radial-gradient(circle at 80% 0%, #0f2d57 0%, transparent 42%),
+                linear-gradient(180deg, var(--bg-1), var(--bg-0) 32%, #061121 100%);
             line-height: 1.55;
         }
 
@@ -82,7 +83,7 @@
             text-decoration: none;
             color: white;
             letter-spacing: 0.01em;
-            font-size: 1.1rem;
+            font-size: 2.0rem;
         }
 
         .brand span {
@@ -101,7 +102,7 @@
         }
 
         .hero {
-            padding: 5.2rem 0 4rem;
+            padding: 4.6rem 0 1.6rem;
             text-align: center;
         }
 
@@ -141,6 +142,7 @@
             font-size: 0.96rem;
             padding: 0.86rem 0.9rem;
             outline: none;
+            scroll-margin-top: 96px;
         }
 
         .download-form button,
@@ -200,6 +202,24 @@
             font-size: 1.02rem;
         }
 
+        .feature-icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            background: rgba(37, 212, 194, 0.14);
+            border: 1px solid rgba(56, 240, 203, 0.35);
+            color: var(--accent-2);
+        }
+
+        .feature-icon svg {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
         .card p {
             margin: 0;
             color: var(--muted);
@@ -209,6 +229,10 @@
         .steps .card {
             position: relative;
             padding-top: 2rem;
+        }
+
+        .steps {
+            padding-top: 1.3rem;
         }
 
         .step-badge {
@@ -224,6 +248,19 @@
             font-weight: 700;
             color: #092822;
             background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        }
+
+        .step-cta-wrap {
+            margin-top: 1.25rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .step-cta-wrap .cta {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .two-col {
@@ -255,8 +292,13 @@
             border-radius: 999px;
         }
 
-        .dot.good { background: var(--good); }
-        .dot.bad { background: var(--bad); }
+        .dot.good {
+            background: var(--good);
+        }
+
+        .dot.bad {
+            background: var(--bad);
+        }
 
         .media-tabs {
             display: grid;
@@ -284,27 +326,12 @@
             margin-top: 0.7rem;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-            margin-top: 1.1rem;
+        .faq-list {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .stat {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--panel-border);
-            background: rgba(11, 35, 64, 0.72);
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 1.65rem;
-            color: var(--accent-2);
-            margin-bottom: 0.2rem;
-        }
 
         footer {
             padding: 1.1rem 0 2.4rem;
@@ -312,6 +339,30 @@
             font-size: 0.85rem;
             border-top: 1px solid rgba(135, 171, 219, 0.16);
             margin-top: 2rem;
+        }
+
+        .footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #a8c2df;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-2);
         }
 
         @media (max-width: 920px) {
@@ -334,24 +385,25 @@
             }
 
             .grid,
-            .media-tabs,
-            .stats {
+            .media-tabs {
                 grid-template-columns: 1fr;
             }
 
             .hero {
                 padding-top: 4.3rem;
+                padding-bottom: 1.1rem;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container nav">
             <a href="/" class="brand">Reel<span>Stack</span></a>
             <nav class="nav-links">
-                <a href="#why">Features</a>
                 <a href="#download">How It Works</a>
+                <a href="#why">Features</a>
                 <a href="#faq">FAQ</a>
             </nav>
         </div>
@@ -360,14 +412,41 @@
     <main>
         <section class="hero">
             <div class="container">
-                <span class="pill">Fast • No Watermark • Secure</span>
                 <h1>The Ultimate Instagram Reels & Video Downloader</h1>
-                <p class="lead">Paste a public Instagram link and download high-quality reels, videos, and photos in seconds. ReelStack works on phone, tablet, and desktop.</p>
+                <p class="lead">Paste a public Instagram link and download high quality reels, videos, and photos instantly. </p>
                 <form class="download-form" action="#" method="post">
-                    <input type="url" placeholder="Paste Instagram URL here..." aria-label="Instagram URL">
+                    <input id="reel-input" type="url" placeholder="Paste Instagram URL here..." aria-label="Instagram URL">
                     <button type="button">Download</button>
                 </form>
-                <p class="subtle">No login required. ReelStack only supports publicly available content.</p>
+            </div>
+        </section>
+
+        <section id="download" class="steps">
+            <div class="container">
+                <div class="section-head">
+                    <span class="pill">3 Easy Steps</span>
+                    <h2>How to Download Instagram Content</h2>
+                </div>
+                <div class="grid">
+                    <article class="card">
+                        <span class="step-badge">1</span>
+                        <h3>Copy Media Link</h3>
+                        <p>Open Instagram and copy the URL of the public reel, post, or video.</p>
+                    </article>
+                    <article class="card">
+                        <span class="step-badge">2</span>
+                        <h3>Paste Into ReelStack</h3>
+                        <p>Insert the link in the input field and tap download.</p>
+                    </article>
+                    <article class="card">
+                        <span class="step-badge">3</span>
+                        <h3>Save to Device</h3>
+                        <p>Choose the generated file and save directly to your phone or desktop.</p>
+                    </article>
+                </div>
+                <div class="step-cta-wrap">
+                    <a href="#reel-input" class="cta">Start Download</a>
+                </div>
             </div>
         </section>
 
@@ -379,98 +458,69 @@
                     <p>Built for speed, quality, and privacy. Everything you need to download social content from public links in one clean tool.</p>
                 </div>
                 <div class="grid">
-                    <article class="card"><h3>Fast Processing</h3><p>Optimized extraction pipeline for instant link parsing and quick downloads.</p></article>
-                    <article class="card"><h3>Anonymous & Private</h3><p>No mandatory login and no user tracking dashboards for basic usage.</p></article>
-                    <article class="card"><h3>High-Resolution Media</h3><p>Download content in available source quality for sharp playback.</p></article>
-                    <article class="card"><h3>Device Friendly</h3><p>Works on Android, iOS, Windows, and macOS with responsive UX.</p></article>
-                    <article class="card"><h3>All Public Formats</h3><p>Supports reels, videos, photos, and carousel posts from public URLs.</p></article>
-                    <article class="card"><h3>Simple Workflow</h3><p>Copy link, paste into ReelStack, and save media with minimal clicks.</p></article>
-                </div>
-            </div>
-        </section>
-
-        <section id="download" class="steps">
-            <div class="container">
-                <div class="section-head">
-                    <span class="pill">3 Easy Steps</span>
-                    <h2>How to Download Instagram Content</h2>
-                    <p>Use this quick flow to grab content safely and efficiently.</p>
-                </div>
-                <div class="grid">
                     <article class="card">
-                        <span class="step-badge">1</span>
-                        <h3>Copy Media Link</h3>
-                        <p>Open Instagram and copy the URL of the public reel, post, or video.</p>
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"></path>
+                            </svg>
+                        </div>
+                        <h3>Lightning Fast Downloads</h3>
+                        <p>Paste your link and get your file in seconds. No waiting. No buffering.</p>
                     </article>
                     <article class="card">
-                        <span class="step-badge">2</span>
-                        <h3>Paste Into ReelStack</h3>
-                        <p>Insert the link in the input field and trigger download processing.</p>
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M12 7v10M8.5 9.5h7M8.5 14.5h7"></path>
+                            </svg>
+                        </div>
+                        <h3>100% Free No Limits</h3>
+                        <p>Download as much as you want. No subscriptions, no hidden fees.</p>
                     </article>
                     <article class="card">
-                        <span class="step-badge">3</span>
-                        <h3>Save to Device</h3>
-                        <p>Choose the generated file and save directly to your phone or desktop.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="section-head">
-                    <span class="pill">Comparison</span>
-                    <h2>Online Downloader vs Mobile Apps</h2>
-                </div>
-                <div class="two-col">
-                    <article class="card">
-                        <h3>ReelStack (Online)</h3>
-                        <ul class="checklist">
-                            <li><span class="dot good"></span>No installation required</li>
-                            <li><span class="dot good"></span>Works across all devices</li>
-                            <li><span class="dot good"></span>No account required for public links</li>
-                            <li><span class="dot good"></span>Quick browser-based workflow</li>
-                        </ul>
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                                <path d="M7 9h10M7 13h6"></path>
+                                <path d="M9 20h6"></path>
+                            </svg>
+                        </div>
+                        <h3>Original HD Quality</h3>
+                        <p>Download content in available source quality for sharp playback.</p>
                     </article>
                     <article class="card">
-                        <h3>Typical Downloader Apps</h3>
-                        <ul class="checklist">
-                            <li><span class="dot bad"></span>Requires install and updates</li>
-                            <li><span class="dot bad"></span>Can include ads and bloat</li>
-                            <li><span class="dot bad"></span>Often device/platform-limited</li>
-                            <li><span class="dot bad"></span>May request excessive permissions</li>
-                        </ul>
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+                                <path d="M8 10V7a4 4 0 118 0"></path>
+                            </svg>
+                        </div>
+                        <h3>No Login Required</h3>
+                        <p>No sign-ups, no accounts, no personal data needed.</p>
                     </article>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="section-head">
-                    <span class="pill">Media Types</span>
-                    <h2>Supported Instagram Media Types</h2>
-                </div>
-                <div class="media-tabs">
-                    <div class="media-tab">Reels</div>
-                    <div class="media-tab">Videos</div>
-                    <div class="media-tab">Stories</div>
-                    <div class="media-tab">Photos</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="section-head">
-                    <span class="pill">Social Proof</span>
-                    <h2>What Our Users Say</h2>
-                    <p>Used by creators, marketers, and teams who need reliable access to downloadable media from public links.</p>
-                </div>
-                <div class="stats">
-                    <div class="stat"><strong>50K+</strong>Monthly active users</div>
-                    <div class="stat"><strong>100K+</strong>Downloads processed</div>
-                    <div class="stat"><strong>4.9/5</strong>Average satisfaction score</div>
+                    <article class="card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2.5" y="5" width="13" height="9" rx="1.5"></rect>
+                                <rect x="17" y="7" width="4.5" height="10" rx="1"></rect>
+                                <path d="M8 17h2"></path>
+                            </svg>
+                        </div>
+                        <h3>Device Friendly</h3>
+                        <p>Works on Android, iOS, Windows, and macOS flawlessly in any modern browser. No app installation required.</p>
+                    </article>
+                    <article class="card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="4" width="7" height="7" rx="1"></rect>
+                                <rect x="3" y="13" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="13" width="7" height="7" rx="1"></rect>
+                            </svg>
+                        </div>
+                        <h3>Supports All Public Content</h3>
+                        <p>Download reels, videos, photos, and carousel posts from public URLs.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -478,21 +528,49 @@
         <section id="faq">
             <div class="container">
                 <div class="section-head">
-                    <span class="pill">Help</span>
-                    <h2>Detailed FAQ & Troubleshooting</h2>
+                    <span class="pill">Help Centre</span>
+                    <h2>Frequently Asked Questions</h2>
                 </div>
-                <div class="grid">
-                    <details class="card" open>
+                <div class="grid faq-list">
+                    <details class="card">
                         <summary>Is ReelStack free to use?</summary>
-                        <p>Yes. Core downloading features for public Instagram links are free.</p>
+                        <p>Yes. ReelStack is completely free for downloading public Instagram links. No subscriptions or hidden fees.</p>
                     </details>
                     <details class="card">
-                        <summary>Do I need to sign in?</summary>
-                        <p>No sign-in is required for basic public-link downloads.</p>
+                        <summary>Do I need to sign in or create an account?</summary>
+                        <p>No. You do not need to sign up or log in to download public content.</p>
+                    </details>
+                    <details class="card">
+                        <summary>Do I need to install an app or extension?</summary>
+                        <p>No installation is required. ReelStack works directly in your browser on both desktop and mobile devices.</p>
+                    </details>
+                    <details class="card">
+                        <summary>Does ReelStack work on iPhone, Android, and PC?</summary>
+                        <p>Yes. It works on iPhone, iPad, Android, Windows, macOS, and Linux as long as you are using a modern browser.</p>
+                    </details>
+                    <details class="card">
+                        <summary>What type of Instagram content can I download?</summary>
+                        <p>You can download public Reels, videos, photos, stories, carousel posts, and IGTV videos.</p>
+                    </details>
+                    <details class="card">
+                        <summary>Can I download private Instagram posts or stories?</summary>
+                        <p>No. ReelStack only works with publicly available content. Private, removed, or restricted posts cannot be accessed.</p>
+                    </details>
+                    <details class="card">
+                        <summary>What file formats will my downloads be in?</summary>
+                        <p>Videos are downloaded in MP4 format for universal playback, and images are saved as high-quality JPG files.</p>
+                    </details>
+                    <details class="card">
+                        <summary>Will my downloads be in HD quality?</summary>
+                        <p>Yes. If the original content is uploaded in high definition, ReelStack preserves the best available quality.</p>
                     </details>
                     <details class="card">
                         <summary>Why is my download not working?</summary>
-                        <p>Check that the URL is public and valid, then retry. Private or removed posts are not supported.</p>
+                        <p>Make sure the link is valid and publicly accessible. Private, deleted, or restricted posts are not supported. If needed, wait a few minutes and try again.</p>
+                    </details>
+                    <details class="card">
+                        <summary>Do you store my downloads or track my activity?</summary>
+                        <p>No. ReelStack does not store your media, links, or download history. Your activity remains private.</p>
                     </details>
                 </div>
             </div>
@@ -500,9 +578,16 @@
     </main>
 
     <footer>
-        <div class="container">
-            <div>© {{ date('Y') }} ReelStack. Download responsibly and respect creators' rights.</div>
+        <div class="container footer-row">
+            <div>&copy; {{ date('Y') }} ReelStack. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="{{ route('about') }}">About Us</a>
+                <a href="{{ route('privacy') }}">Privacy Policy</a>
+                <a href="{{ route('terms') }}">Terms of Use</a>
+            </div>
         </div>
     </footer>
 </body>
+
 </html>
+
