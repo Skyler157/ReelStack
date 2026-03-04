@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'apify' => [
+        'token' => env('APIFY_TOKEN'),
+        'actor' => env('APIFY_ACTOR', 'apify/instagram-api-scraper'),
+        'base_url' => env('APIFY_BASE_URL', 'https://api.apify.com/v2'),
+    ],
+
 ];

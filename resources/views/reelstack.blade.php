@@ -4,8 +4,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ReelStack | Instagram Reels & Video Downloader</title>
-    <meta name="description" content="ReelStack is a fast Instagram Reels and Video downloader. Save high-quality content from public links in seconds.">
+
+    <title>ReelStack | Free Instagram Reels & Video Downloader</title>
+
+    <meta name="description" content="ReelStack is a Free Instagram Reels downloader. Download Instagram videos, photos, and carousel posts in HD quality from public links.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="ReelStack">
+    <meta name="theme-color" content="#081a35">
+
+    <link rel="canonical" href="https://yourdomain.com/">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta property="og:title" content="Free Instagram Reels Downloader | ReelStack">
+    <meta property="og:description" content="Download Instagram Reels, videos, and photos in HD quality. No login required. 100% free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:image" content="https://yourdomain.com/preview.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Instagram Reels Downloader | ReelStack">
+    <meta name="twitter:description" content="Download Instagram videos and reels in HD from public links. No login required.">
+    <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -99,6 +119,12 @@
         .nav-links a {
             color: var(--muted);
             text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-2);
+            transform: translateY(-2px);
         }
 
         .hero {
@@ -145,6 +171,15 @@
             scroll-margin-top: 96px;
         }
 
+        .download-form input:focus {
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 2px rgba(56, 240, 203, 0.15);
+        }
+
+        .download-form input.error {
+            border-color: var(--warning);
+        }
+
         .download-form button,
         .cta {
             border: 0;
@@ -158,9 +193,139 @@
             box-shadow: 0 10px 30px rgba(18, 188, 169, 0.32);
         }
 
+        .cta:hover,
+        .download-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(18, 188, 169, 0.45);
+        }
+
         .subtle {
             color: #86a2c4;
             font-size: 0.87rem;
+        }
+
+        .status-box {
+            width: min(760px, 100%);
+            margin: 0.75rem auto 0;
+            padding: 0.9rem;
+            border-radius: 10px;
+            border: 1px solid rgba(246, 140, 124, 0.55);
+            background: rgba(54, 18, 20, 0.72);
+            color: #ffd2cb;
+            font-size: 0.9rem;
+            display: none;
+            text-align: left;
+        }
+
+        .loading-indicator {
+            width: min(760px, 100%);
+            margin: 0.75rem auto 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+            background: rgba(10, 29, 58, 0.72);
+            color: #cfe3fa;
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 999px;
+            border: 2px solid rgba(56, 240, 203, 0.25);
+            border-top-color: var(--accent-2);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .result-actions {
+            width: min(760px, 100%);
+            margin: 0.85rem auto 0;
+            padding: 0.9rem;
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+            background: rgba(10, 29, 58, 0.72);
+            display: none;
+        }
+
+        .result-preview {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid rgba(145, 180, 220, 0.22);
+            margin-bottom: 0.8rem;
+            max-height: 260px;
+            object-fit: cover;
+            background: #071327;
+        }
+
+        .result-btns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(137, 173, 219, 0.35);
+            border-radius: 10px;
+            padding: 0.86rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            color: #dcecff;
+            background: rgba(8, 25, 49, 0.9);
+        }
+
+        .preview-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 8, 18, 0.85);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            padding: 1rem;
+        }
+
+        .preview-modal-content {
+            width: min(880px, 100%);
+            background: #071327;
+            border: 1px solid rgba(137, 173, 219, 0.3);
+            border-radius: 14px;
+            padding: 0.8rem;
+            position: relative;
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 999px;
+            border: 1px solid rgba(137, 173, 219, 0.35);
+            background: rgba(7, 19, 39, 0.95);
+            color: #dcecff;
+            font-size: 1.2rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .preview-player {
+            width: 100%;
+            border-radius: 10px;
+            background: #000;
+            max-height: 72vh;
         }
 
         section {
@@ -195,6 +360,12 @@
             border: 1px solid var(--panel-border);
             border-radius: 14px;
             padding: 1rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 240, 203, 0.4);
         }
 
         .card h3 {
@@ -414,10 +585,22 @@
             <div class="container">
                 <h1>The Ultimate Instagram Reels & Video Downloader</h1>
                 <p class="lead">Paste a public Instagram link and download high quality reels, videos, and photos instantly. </p>
-                <form class="download-form" action="#" method="post">
-                    <input id="reel-input" type="url" placeholder="Paste Instagram URL here..." aria-label="Instagram URL">
-                    <button type="button">Download</button>
+                <form id="download-form" class="download-form" action="#" method="post">
+                    <input id="reel-input" type="url" placeholder="Paste Instagram URL here..." aria-label="Instagram URL" required>
+                    <button type="submit">Download</button>
                 </form>
+                <div id="download-status" class="status-box"></div>
+                <div id="loading-indicator" class="loading-indicator">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span>Fetching video...</span>
+                </div>
+                <div id="result-actions" class="result-actions">
+                    <video id="result-preview" class="result-preview" controls preload="metadata"></video>
+                    <div class="result-btns">
+                        <button id="download-now-btn" type="button" class="cta">Download Video</button>
+                        <button id="preview-btn" type="button" class="btn-secondary">Preview</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -587,7 +770,182 @@
             </div>
         </div>
     </footer>
+
+    <div id="preview-modal" class="preview-modal" aria-hidden="true">
+        <div class="preview-modal-content">
+            <button id="preview-close" type="button" class="preview-close" aria-label="Close preview">×</button>
+            <video id="preview-player" class="preview-player" controls preload="metadata"></video>
+        </div>
+    </div>
+<script>
+    (() => {
+        const form = document.getElementById("download-form");
+        const input = document.getElementById("reel-input");
+        const statusBox = document.getElementById("download-status");
+        const loadingIndicator = document.getElementById("loading-indicator");
+        const actionsBox = document.getElementById("result-actions");
+        const resultPreview = document.getElementById("result-preview");
+        const downloadNowBtn = document.getElementById("download-now-btn");
+        const previewBtn = document.getElementById("preview-btn");
+        const previewModal = document.getElementById("preview-modal");
+        const previewPlayer = document.getElementById("preview-player");
+        const previewClose = document.getElementById("preview-close");
+        let pollTimer = null;
+        let currentMediaUrl = "";
+        let currentTaskId = null;
+
+        const setError = (message) => {
+            statusBox.style.display = "block";
+            statusBox.textContent = message;
+        };
+
+        const clearError = () => {
+            statusBox.style.display = "none";
+            statusBox.textContent = "";
+        };
+
+        const setLoading = (isLoading) => {
+            loadingIndicator.style.display = isLoading ? "flex" : "none";
+        };
+
+        const hideActions = () => {
+            actionsBox.style.display = "none";
+            resultPreview.removeAttribute("src");
+            resultPreview.load();
+            currentMediaUrl = "";
+            currentTaskId = null;
+        };
+
+        const showActions = (url, taskId) => {
+            currentMediaUrl = url;
+            currentTaskId = taskId;
+            resultPreview.src = url;
+            actionsBox.style.display = "block";
+        };
+
+        const openPreview = () => {
+            if (!currentMediaUrl) return;
+            previewPlayer.src = currentMediaUrl;
+            previewModal.style.display = "flex";
+            previewModal.setAttribute("aria-hidden", "false");
+            previewPlayer.play().catch(() => {});
+        };
+
+        const closePreview = () => {
+            previewModal.style.display = "none";
+            previewModal.setAttribute("aria-hidden", "true");
+            previewPlayer.pause();
+            previewPlayer.removeAttribute("src");
+            previewPlayer.load();
+        };
+
+        const stopPolling = () => {
+            if (pollTimer) {
+                clearInterval(pollTimer);
+                pollTimer = null;
+            }
+        };
+
+        const pollTask = (taskId) => {
+            pollTimer = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/downloads/${taskId}`);
+                    const data = await response.json();
+
+                    if (data.status === "completed") {
+                        stopPolling();
+                        setLoading(false);
+                        if (!data.media_url) {
+                            setError("Could not retrieve a downloadable media URL.");
+                            return;
+                        }
+                        showActions(data.media_url, taskId);
+                        return;
+                    }
+
+                    if (data.status === "failed") {
+                        stopPolling();
+                        setLoading(false);
+                        setError(`Failed: ${data.error || "Could not process this link."}`);
+                        return;
+                    }
+                } catch (error) {
+                    stopPolling();
+                    setLoading(false);
+                    setError("Could not fetch task status. Please try again.");
+                }
+            }, 1500);
+        };
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            stopPolling();
+            closePreview();
+            hideActions();
+            clearError();
+
+            const url = input.value.trim();
+            if (!url) {
+                setError("Please paste a valid Instagram URL.");
+                return;
+            }
+            setLoading(true);
+
+            try {
+                const response = await fetch("/api/downloads", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    setLoading(false);
+                    const msg = data.message || "Request failed.";
+                    setError(msg);
+                    return;
+                }
+
+                pollTask(data.id);
+            } catch (error) {
+                setLoading(false);
+                setError("Network error while submitting the request.");
+            }
+        });
+
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                form.requestSubmit();
+            }
+        });
+
+        downloadNowBtn.addEventListener("click", () => {
+            if (!currentTaskId) return;
+            window.location.href = `/api/downloads/${currentTaskId}/file`;
+        });
+
+        previewBtn.addEventListener("click", openPreview);
+        previewClose.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            closePreview();
+        });
+        previewModal.addEventListener("click", (event) => {
+            if (event.target === previewModal) {
+                closePreview();
+            }
+        });
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && previewModal.style.display === "flex") {
+                closePreview();
+            }
+        });
+    })();
+</script>
+
 </body>
-
 </html>
-
