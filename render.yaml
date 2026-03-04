@@ -92,7 +92,7 @@ services:
     name: reelstack-cron
     env: docker
     region: oregon
-    plan: free
+    plan: starter
     branch: main
     schedule: "*/1 * * * *"
     envVars:
