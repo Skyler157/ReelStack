@@ -16,7 +16,7 @@ services:
       - key: APP_ROLE
         value: web
       - key: RUN_MIGRATIONS
-        value: "true"
+        value: "false"
       - key: APP_KEY
         sync: false
       - key: APP_URL

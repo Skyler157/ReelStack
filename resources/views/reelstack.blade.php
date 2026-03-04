@@ -18,7 +18,7 @@
     <meta property="og:title" content="Free Instagram Reels Downloader | ReelStack">
     <meta property="og:description" content="Download Instagram Reels, videos, and photos in HD quality. No login required. 100% free.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://reelstackapp.onrender.com/>
+    <meta property="og:url" content="https://reelstackapp.onrender.com/">
     <meta property="og:image" content="https://reelstackapp.onrender.com/preview.jpg">
 
     <meta name="twitter:card" content="summary_large_image">
