@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: reelstack
+    name: reelstackapp
     env: docker
     region: oregon
     plan: free
