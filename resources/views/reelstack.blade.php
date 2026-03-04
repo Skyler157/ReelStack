@@ -10,10 +10,10 @@
     <meta name="description" content="ReelStack is a Free Instagram Reels downloader. Download Instagram videos, photos, and carousel posts in HD quality from public links.">
     <meta name="robots" content="index, follow">
     <meta name="author" content="ReelStack">
-    <meta name="theme-color" content="#081a35">
+    <meta name="theme-color" content="#081a35" id="theme-color-meta">
 
     <link rel="canonical" href="https://yourdomain.com/">
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/reelstack-icon.svg">
 
     <meta property="og:title" content="Free Instagram Reels Downloader | ReelStack">
     <meta property="og:description" content="Download Instagram Reels, videos, and photos in HD quality. No login required. 100% free.">
@@ -25,6 +25,21 @@
     <meta name="twitter:title" content="Free Instagram Reels Downloader | ReelStack">
     <meta name="twitter:description" content="Download Instagram videos and reels in HD from public links. No login required.">
     <meta name="twitter:image" content="https://yourdomain.com/preview.jpg">
+    <script>
+        (() => {
+            const setThemeColor = (theme) => {
+                const meta = document.getElementById("theme-color-meta");
+                if (!meta) return;
+                meta.setAttribute("content", theme === "light" ? "#f5f9ff" : "#081a35");
+            };
+
+            const storedTheme = localStorage.getItem("reelstack-theme");
+            const prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+            const theme = storedTheme || (prefersLight ? "light" : "dark");
+            document.documentElement.setAttribute("data-theme", theme);
+            setThemeColor(theme);
+        })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +58,67 @@
             --warning: #f68c7c;
             --good: #8cf7ce;
             --bad: #ff9ea1;
+            --body-bg: radial-gradient(circle at 20% -10%, #163467 0%, transparent 45%),
+                radial-gradient(circle at 80% 0%, #0f2d57 0%, transparent 42%),
+                linear-gradient(180deg, var(--bg-1), var(--bg-0) 32%, #061121 100%);
+            --header-bg: rgba(5, 14, 29, 0.72);
+            --header-border: rgba(112, 150, 198, 0.16);
+            --input-bg: rgba(7, 19, 39, 0.85);
+            --input-border: rgba(145, 180, 220, 0.22);
+            --surface-1: rgba(10, 29, 58, 0.72);
+            --surface-2: rgba(10, 31, 57, 0.58);
+            --btn-secondary-bg: rgba(8, 25, 49, 0.9);
+            --btn-secondary-color: #dcecff;
+            --footer-text: #7e99b7;
+            --footer-link: #a8c2df;
+            --preview-bg: #071327;
+            --theme-btn-bg: rgba(8, 25, 49, 0.88);
+            --theme-btn-border: rgba(137, 173, 219, 0.35);
+            --theme-btn-icon: #dcecff;
+            --status-bg: rgba(54, 18, 20, 0.72);
+            --status-border: rgba(246, 140, 124, 0.55);
+            --status-text: #ffd2cb;
+            --loading-text: #cfe3fa;
+            --modal-overlay: rgba(1, 8, 18, 0.85);
+            --video-bg: #000;
+        }
+
+        html[data-theme="light"] {
+            --bg-0: #e8f0ff;
+            --bg-1: #f5f9ff;
+            --bg-2: #dce9ff;
+            --panel: rgba(255, 255, 255, 0.94);
+            --panel-border: rgba(117, 147, 190, 0.28);
+            --text: #10233f;
+            --muted: #4f6787;
+            --accent: #18b9ac;
+            --accent-2: #12a497;
+            --warning: #d8574d;
+            --good: #149d66;
+            --bad: #dc4951;
+            --body-bg: radial-gradient(circle at 10% -10%, #eaf2ff 0%, transparent 40%),
+                radial-gradient(circle at 90% 0%, #e1edff 0%, transparent 38%),
+                linear-gradient(180deg, #f9fcff, #eef5ff 40%, #e5efff 100%);
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --header-border: rgba(117, 147, 190, 0.24);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --input-border: rgba(117, 147, 190, 0.35);
+            --surface-1: rgba(255, 255, 255, 0.92);
+            --surface-2: rgba(247, 251, 255, 0.96);
+            --btn-secondary-bg: rgba(240, 247, 255, 0.95);
+            --btn-secondary-color: #1a365e;
+            --footer-text: #4f6787;
+            --footer-link: #2b517f;
+            --preview-bg: #f2f8ff;
+            --theme-btn-bg: rgba(242, 248, 255, 0.95);
+            --theme-btn-border: rgba(117, 147, 190, 0.35);
+            --theme-btn-icon: #1a365e;
+            --status-bg: rgba(255, 236, 236, 0.92);
+            --status-border: rgba(212, 87, 77, 0.35);
+            --status-text: #8a2e28;
+            --loading-text: #36547b;
+            --modal-overlay: rgba(10, 25, 45, 0.45);
+            --video-bg: #0f213a;
         }
 
         * {
@@ -57,10 +133,9 @@
             margin: 0;
             font-family: "Plus Jakarta Sans", sans-serif;
             color: var(--text);
-            background: radial-gradient(circle at 20% -10%, #163467 0%, transparent 45%),
-                radial-gradient(circle at 80% 0%, #0f2d57 0%, transparent 42%),
-                linear-gradient(180deg, var(--bg-1), var(--bg-0) 32%, #061121 100%);
+            background: var(--body-bg);
             line-height: 1.55;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -87,8 +162,9 @@
             top: 0;
             z-index: 20;
             backdrop-filter: blur(10px);
-            background: rgba(5, 14, 29, 0.72);
-            border-bottom: 1px solid rgba(112, 150, 198, 0.16);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--header-border);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .nav {
@@ -101,7 +177,7 @@
         .brand {
             font-weight: 800;
             text-decoration: none;
-            color: white;
+            color: var(--text);
             letter-spacing: 0.01em;
             font-size: 2.0rem;
         }
@@ -114,6 +190,7 @@
             display: flex;
             gap: 1.2rem;
             font-size: 0.92rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -125,6 +202,42 @@
         .nav-links a:hover {
             color: var(--accent-2);
             transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 999px;
+            border: 1px solid var(--theme-btn-border);
+            background: var(--theme-btn-bg);
+            color: var(--theme-btn-icon);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-2);
+        }
+
+        .theme-toggle svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        html[data-theme="light"] .theme-toggle .icon-sun {
+            display: none;
+        }
+
+        html[data-theme="light"] .theme-toggle .icon-moon {
+            display: inline;
         }
 
         .hero {
@@ -155,14 +268,14 @@
             gap: 0.75rem;
             padding: 0.75rem;
             border-radius: 14px;
-            background: rgba(10, 29, 58, 0.72);
+            background: var(--surface-1);
             border: 1px solid var(--panel-border);
         }
 
         .download-form input {
             width: 100%;
-            background: rgba(7, 19, 39, 0.85);
-            border: 1px solid rgba(145, 180, 220, 0.22);
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
             color: var(--text);
             border-radius: 10px;
             font-size: 0.96rem;
@@ -209,9 +322,9 @@
             margin: 0.75rem auto 0;
             padding: 0.9rem;
             border-radius: 10px;
-            border: 1px solid rgba(246, 140, 124, 0.55);
-            background: rgba(54, 18, 20, 0.72);
-            color: #ffd2cb;
+            border: 1px solid var(--status-border);
+            background: var(--status-bg);
+            color: var(--status-text);
             font-size: 0.9rem;
             display: none;
             text-align: left;
@@ -227,8 +340,8 @@
             padding: 0.8rem;
             border-radius: 10px;
             border: 1px solid var(--panel-border);
-            background: rgba(10, 29, 58, 0.72);
-            color: #cfe3fa;
+            background: var(--surface-1);
+            color: var(--loading-text);
             font-size: 0.9rem;
         }
 
@@ -253,18 +366,18 @@
             padding: 0.9rem;
             border-radius: 10px;
             border: 1px solid var(--panel-border);
-            background: rgba(10, 29, 58, 0.72);
+            background: var(--surface-1);
             display: none;
         }
 
         .result-preview {
             width: 100%;
             border-radius: 10px;
-            border: 1px solid rgba(145, 180, 220, 0.22);
+            border: 1px solid var(--input-border);
             margin-bottom: 0.8rem;
             max-height: 260px;
             object-fit: cover;
-            background: #071327;
+            background: var(--preview-bg);
         }
 
         .result-btns {
@@ -274,20 +387,20 @@
         }
 
         .btn-secondary {
-            border: 1px solid rgba(137, 173, 219, 0.35);
+            border: 1px solid var(--panel-border);
             border-radius: 10px;
             padding: 0.86rem 1.2rem;
             font-weight: 700;
             font-size: 0.92rem;
             cursor: pointer;
-            color: #dcecff;
-            background: rgba(8, 25, 49, 0.9);
+            color: var(--btn-secondary-color);
+            background: var(--btn-secondary-bg);
         }
 
         .preview-modal {
             position: fixed;
             inset: 0;
-            background: rgba(1, 8, 18, 0.85);
+            background: var(--modal-overlay);
             backdrop-filter: blur(6px);
             display: none;
             align-items: center;
@@ -298,8 +411,8 @@
 
         .preview-modal-content {
             width: min(880px, 100%);
-            background: #071327;
-            border: 1px solid rgba(137, 173, 219, 0.3);
+            background: var(--preview-bg);
+            border: 1px solid var(--panel-border);
             border-radius: 14px;
             padding: 0.8rem;
             position: relative;
@@ -312,9 +425,9 @@
             width: 2rem;
             height: 2rem;
             border-radius: 999px;
-            border: 1px solid rgba(137, 173, 219, 0.35);
-            background: rgba(7, 19, 39, 0.95);
-            color: #dcecff;
+            border: 1px solid var(--panel-border);
+            background: var(--surface-1);
+            color: var(--text);
             font-size: 1.2rem;
             line-height: 1;
             cursor: pointer;
@@ -324,7 +437,7 @@
         .preview-player {
             width: 100%;
             border-radius: 10px;
-            background: #000;
+            background: var(--video-bg);
             max-height: 72vh;
         }
 
@@ -453,7 +566,7 @@
             display: flex;
             align-items: center;
             gap: 0.55rem;
-            color: #d9ecff;
+            color: var(--text);
             font-size: 0.93rem;
         }
 
@@ -483,7 +596,7 @@
             padding: 0.85rem 0.7rem;
             border-radius: 10px;
             border: 1px solid var(--panel-border);
-            background: rgba(10, 31, 57, 0.58);
+            background: var(--surface-2);
             font-weight: 700;
             font-size: 0.9rem;
         }
@@ -506,9 +619,9 @@
 
         footer {
             padding: 1.1rem 0 2.4rem;
-            color: #7e99b7;
+            color: var(--footer-text);
             font-size: 0.85rem;
-            border-top: 1px solid rgba(135, 171, 219, 0.16);
+            border-top: 1px solid var(--header-border);
             margin-top: 2rem;
         }
 
@@ -528,7 +641,7 @@
         }
 
         .footer-links a {
-            color: #a8c2df;
+            color: var(--footer-link);
             text-decoration: none;
         }
 
@@ -547,7 +660,20 @@
         }
 
         @media (max-width: 700px) {
+            .nav {
+                height: auto;
+                padding: 0.75rem 0;
+            }
+
+            .brand {
+                font-size: 1.6rem;
+            }
+
             .nav-links {
+                gap: 0.6rem;
+            }
+
+            .nav-links a {
                 display: none;
             }
 
@@ -564,6 +690,51 @@
                 padding-top: 4.3rem;
                 padding-bottom: 1.1rem;
             }
+
+            h1 {
+                font-size: clamp(1.7rem, 8vw, 2.1rem);
+                line-height: 1.15;
+            }
+
+            .lead {
+                font-size: 0.95rem;
+                margin-bottom: 1.1rem;
+            }
+
+            section {
+                padding: 2.6rem 0;
+            }
+
+            .card {
+                padding: 0.9rem;
+            }
+
+            .result-btns .cta,
+            .result-btns .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .preview-modal-content {
+                padding: 0.65rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .download-form {
+                padding: 0.6rem;
+                gap: 0.6rem;
+            }
+
+            .download-form input,
+            .download-form button {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -576,6 +747,15 @@
                 <a href="#download">How It Works</a>
                 <a href="#why">Features</a>
                 <a href="#faq">FAQ</a>
+                <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
@@ -777,175 +957,195 @@
             <video id="preview-player" class="preview-player" controls preload="metadata"></video>
         </div>
     </div>
-<script>
-    (() => {
-        const form = document.getElementById("download-form");
-        const input = document.getElementById("reel-input");
-        const statusBox = document.getElementById("download-status");
-        const loadingIndicator = document.getElementById("loading-indicator");
-        const actionsBox = document.getElementById("result-actions");
-        const resultPreview = document.getElementById("result-preview");
-        const downloadNowBtn = document.getElementById("download-now-btn");
-        const previewBtn = document.getElementById("preview-btn");
-        const previewModal = document.getElementById("preview-modal");
-        const previewPlayer = document.getElementById("preview-player");
-        const previewClose = document.getElementById("preview-close");
-        let pollTimer = null;
-        let currentMediaUrl = "";
-        let currentTaskId = null;
+    <script>
+        (() => {
+            const form = document.getElementById("download-form");
+            const input = document.getElementById("reel-input");
+            const statusBox = document.getElementById("download-status");
+            const loadingIndicator = document.getElementById("loading-indicator");
+            const actionsBox = document.getElementById("result-actions");
+            const resultPreview = document.getElementById("result-preview");
+            const downloadNowBtn = document.getElementById("download-now-btn");
+            const previewBtn = document.getElementById("preview-btn");
+            const previewModal = document.getElementById("preview-modal");
+            const previewPlayer = document.getElementById("preview-player");
+            const previewClose = document.getElementById("preview-close");
+            const themeToggle = document.getElementById("theme-toggle");
+            const themeColorMeta = document.getElementById("theme-color-meta");
+            let pollTimer = null;
+            let currentMediaUrl = "";
+            let currentTaskId = null;
 
-        const setError = (message) => {
-            statusBox.style.display = "block";
-            statusBox.textContent = message;
-        };
+            const setError = (message) => {
+                statusBox.style.display = "block";
+                statusBox.textContent = message;
+            };
 
-        const clearError = () => {
-            statusBox.style.display = "none";
-            statusBox.textContent = "";
-        };
+            const clearError = () => {
+                statusBox.style.display = "none";
+                statusBox.textContent = "";
+            };
 
-        const setLoading = (isLoading) => {
-            loadingIndicator.style.display = isLoading ? "flex" : "none";
-        };
+            const setLoading = (isLoading) => {
+                loadingIndicator.style.display = isLoading ? "flex" : "none";
+            };
 
-        const hideActions = () => {
-            actionsBox.style.display = "none";
-            resultPreview.removeAttribute("src");
-            resultPreview.load();
-            currentMediaUrl = "";
-            currentTaskId = null;
-        };
+            const setThemeColor = (theme) => {
+                if (!themeColorMeta) return;
+                themeColorMeta.setAttribute("content", theme === "light" ? "#f5f9ff" : "#081a35");
+            };
 
-        const showActions = (url, taskId) => {
-            currentMediaUrl = url;
-            currentTaskId = taskId;
-            resultPreview.src = url;
-            actionsBox.style.display = "block";
-        };
+            const hideActions = () => {
+                actionsBox.style.display = "none";
+                resultPreview.removeAttribute("src");
+                resultPreview.load();
+                currentMediaUrl = "";
+                currentTaskId = null;
+            };
 
-        const openPreview = () => {
-            if (!currentMediaUrl) return;
-            previewPlayer.src = currentMediaUrl;
-            previewModal.style.display = "flex";
-            previewModal.setAttribute("aria-hidden", "false");
-            previewPlayer.play().catch(() => {});
-        };
+            const showActions = (url, taskId) => {
+                currentMediaUrl = url;
+                currentTaskId = taskId;
+                resultPreview.src = url;
+                actionsBox.style.display = "block";
+            };
 
-        const closePreview = () => {
-            previewModal.style.display = "none";
-            previewModal.setAttribute("aria-hidden", "true");
-            previewPlayer.pause();
-            previewPlayer.removeAttribute("src");
-            previewPlayer.load();
-        };
+            const openPreview = () => {
+                if (!currentMediaUrl) return;
+                previewPlayer.src = currentMediaUrl;
+                previewModal.style.display = "flex";
+                previewModal.setAttribute("aria-hidden", "false");
+                previewPlayer.play().catch(() => {});
+            };
 
-        const stopPolling = () => {
-            if (pollTimer) {
-                clearInterval(pollTimer);
-                pollTimer = null;
-            }
-        };
+            const closePreview = () => {
+                previewModal.style.display = "none";
+                previewModal.setAttribute("aria-hidden", "true");
+                previewPlayer.pause();
+                previewPlayer.removeAttribute("src");
+                previewPlayer.load();
+            };
 
-        const pollTask = (taskId) => {
-            pollTimer = setInterval(async () => {
-                try {
-                    const response = await fetch(`/api/downloads/${taskId}`);
-                    const data = await response.json();
+            const stopPolling = () => {
+                if (pollTimer) {
+                    clearInterval(pollTimer);
+                    pollTimer = null;
+                }
+            };
 
-                    if (data.status === "completed") {
-                        stopPolling();
-                        setLoading(false);
-                        if (!data.media_url) {
-                            setError("Could not retrieve a downloadable media URL.");
+            const pollTask = (taskId) => {
+                pollTimer = setInterval(async () => {
+                    try {
+                        const response = await fetch(`/api/downloads/${taskId}`);
+                        const data = await response.json();
+
+                        if (data.status === "completed") {
+                            stopPolling();
+                            setLoading(false);
+                            if (!data.media_url) {
+                                setError("Could not retrieve a downloadable media URL.");
+                                return;
+                            }
+                            showActions(data.media_url, taskId);
                             return;
                         }
-                        showActions(data.media_url, taskId);
-                        return;
-                    }
 
-                    if (data.status === "failed") {
+                        if (data.status === "failed") {
+                            stopPolling();
+                            setLoading(false);
+                            setError(`Failed: ${data.error || "Could not process this link."}`);
+                            return;
+                        }
+                    } catch (error) {
                         stopPolling();
                         setLoading(false);
-                        setError(`Failed: ${data.error || "Could not process this link."}`);
-                        return;
+                        setError("Could not fetch task status. Please try again.");
                     }
-                } catch (error) {
-                    stopPolling();
-                    setLoading(false);
-                    setError("Could not fetch task status. Please try again.");
-                }
-            }, 1500);
-        };
+                }, 1500);
+            };
 
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            stopPolling();
-            closePreview();
-            hideActions();
-            clearError();
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                stopPolling();
+                closePreview();
+                hideActions();
+                clearError();
 
-            const url = input.value.trim();
-            if (!url) {
-                setError("Please paste a valid Instagram URL.");
-                return;
-            }
-            setLoading(true);
-
-            try {
-                const response = await fetch("/api/downloads", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({ url })
-                });
-
-                const data = await response.json();
-                if (!response.ok) {
-                    setLoading(false);
-                    const msg = data.message || "Request failed.";
-                    setError(msg);
+                const url = input.value.trim();
+                if (!url) {
+                    setError("Please paste a valid Instagram URL.");
                     return;
                 }
+                setLoading(true);
 
-                pollTask(data.id);
-            } catch (error) {
-                setLoading(false);
-                setError("Network error while submitting the request.");
-            }
-        });
+                try {
+                    const response = await fetch("/api/downloads", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            url
+                        })
+                    });
 
-        input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
+                    const data = await response.json();
+                    if (!response.ok) {
+                        setLoading(false);
+                        const msg = data.message || "Request failed.";
+                        setError(msg);
+                        return;
+                    }
+
+                    pollTask(data.id);
+                } catch (error) {
+                    setLoading(false);
+                    setError("Network error while submitting the request.");
+                }
+            });
+
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    form.requestSubmit();
+                }
+            });
+
+            downloadNowBtn.addEventListener("click", () => {
+                if (!currentTaskId) return;
+                window.location.href = `/api/downloads/${currentTaskId}/file`;
+            });
+
+            previewBtn.addEventListener("click", openPreview);
+            previewClose.addEventListener("click", (event) => {
                 event.preventDefault();
-                form.requestSubmit();
-            }
-        });
-
-        downloadNowBtn.addEventListener("click", () => {
-            if (!currentTaskId) return;
-            window.location.href = `/api/downloads/${currentTaskId}/file`;
-        });
-
-        previewBtn.addEventListener("click", openPreview);
-        previewClose.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            closePreview();
-        });
-        previewModal.addEventListener("click", (event) => {
-            if (event.target === previewModal) {
+                event.stopPropagation();
                 closePreview();
+            });
+            previewModal.addEventListener("click", (event) => {
+                if (event.target === previewModal) {
+                    closePreview();
+                }
+            });
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && previewModal.style.display === "flex") {
+                    closePreview();
+                }
+            });
+
+            if (themeToggle) {
+                themeToggle.addEventListener("click", () => {
+                    const current = document.documentElement.getAttribute("data-theme") || "dark";
+                    const next = current === "dark" ? "light" : "dark";
+                    document.documentElement.setAttribute("data-theme", next);
+                    localStorage.setItem("reelstack-theme", next);
+                    setThemeColor(next);
+                });
             }
-        });
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && previewModal.style.display === "flex") {
-                closePreview();
-            }
-        });
-    })();
-</script>
+        })();
+    </script>
 
 </body>
+
 </html>
