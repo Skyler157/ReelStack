@@ -118,9 +118,37 @@ Use three services:
 
 Set `APP_ENV=production`, `APP_DEBUG=false`, and provide production DB + Apify variables.
 
+### Render Quick Start (Docker)
+
+This repo includes:
+
+- `Dockerfile`
+- `docker/entrypoint.sh`
+- `render.yaml` (web + worker + cron blueprint)
+
+Steps:
+
+1. Push code to GitHub.
+2. In Render, click **New +** -> **Blueprint**.
+3. Select this repo (`Skyler157/ReelStack`).
+4. Render will detect `render.yaml` and create:
+   - `reelstack-web`
+   - `reelstack-worker`
+   - `reelstack-cron`
+5. Fill all `sync: false` environment variables in Render UI:
+   - `APP_KEY`
+   - `APP_URL`
+   - `DB_*`
+   - `APIFY_TOKEN`
+6. Deploy.
+
+Important:
+
+- Rotate your Apify token if it was exposed.
+- Ensure all services use the same production database.
+
 ## Security Notes
 
 - Only supports publicly available Instagram content
 - Rotate leaked tokens immediately if exposed
 - Add stronger domain validation and abuse controls for production scale
-
