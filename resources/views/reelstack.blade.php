@@ -12,19 +12,19 @@
     <meta name="author" content="ReelStack">
     <meta name="theme-color" content="#081a35" id="theme-color-meta">
 
-    <link rel="canonical" href="https://reelstack.onrender.com/">
+    <link rel="canonical" href="https://reelstackapp.onrender.com/">
     <link rel="icon" type="image/svg+xml" href="/reelstack-icon.svg">
 
     <meta property="og:title" content="Free Instagram Reels Downloader | ReelStack">
     <meta property="og:description" content="Download Instagram Reels, videos, and photos in HD quality. No login required. 100% free.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://reelstack.onrender.com/>
-    <meta property="og:image" content="https://reelstack.onrender.com/preview.jpg">
+    <meta property="og:url" content="https://reelstackapp.onrender.com/>
+    <meta property="og:image" content="https://reelstackapp.onrender.com/preview.jpg">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Free Instagram Reels Downloader | ReelStack">
     <meta name="twitter:description" content="Download Instagram videos and reels in HD from public links. No login required.">
-    <meta name="twitter:image" content="https://reelstack.onrender.com/preview.jpg">
+    <meta name="twitter:image" content="https://reelstackapp.onrender.com/preview.jpg">
     <script>
         (() => {
             const setThemeColor = (theme) => {
