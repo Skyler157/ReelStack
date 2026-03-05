@@ -228,6 +228,94 @@
             height: 1rem;
         }
 
+        .menu-toggle {
+            display: none;
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 10px;
+            border: 1px solid var(--theme-btn-border);
+            background: var(--theme-btn-bg);
+            color: var(--theme-btn-icon);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .menu-toggle svg {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100dvh;
+            width: min(320px, 86vw);
+            background: var(--surface-1);
+            border-left: 1px solid var(--panel-border);
+            z-index: 60;
+            padding: 1rem;
+            transform: translateX(100%);
+            transition: transform 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .mobile-backdrop {
+            position: fixed;
+            inset: 0;
+            background: var(--modal-overlay);
+            z-index: 55;
+            display: none;
+        }
+
+        .mobile-backdrop.show {
+            display: block;
+        }
+
+        .drawer-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-title {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .drawer-close {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 999px;
+            border: 1px solid var(--theme-btn-border);
+            background: var(--theme-btn-bg);
+            color: var(--theme-btn-icon);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .drawer-links a {
+            text-decoration: none;
+            color: var(--text);
+            padding: 0.65rem 0.7rem;
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+            background: var(--surface-2);
+        }
+
         .theme-toggle .icon-moon {
             display: none;
         }
@@ -663,9 +751,7 @@
             .nav {
                 height: auto;
                 padding: 0.7rem 0;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.6rem;
+                align-items: center;
             }
 
             .brand {
@@ -673,10 +759,12 @@
             }
 
             .nav-links {
-                width: 100%;
-                gap: 0.55rem;
-                flex-wrap: wrap;
-                justify-content: flex-start;
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                margin-left: auto;
             }
 
             .download-form {
@@ -745,6 +833,11 @@
     <header>
         <div class="container nav">
             <a href="/" class="brand">Reel<span>Stack</span></a>
+            <button id="menu-toggle" type="button" class="menu-toggle" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M4 7h16M4 12h16M4 17h16"></path>
+                </svg>
+            </button>
             <nav class="nav-links">
                 <a href="#download">How It Works</a>
                 <a href="#why">Features</a>
@@ -761,6 +854,28 @@
             </nav>
         </div>
     </header>
+
+    <div id="mobile-backdrop" class="mobile-backdrop"></div>
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+        <div class="drawer-head">
+            <span class="drawer-title">Menu</span>
+            <button id="drawer-close" class="drawer-close" type="button" aria-label="Close menu">×</button>
+        </div>
+        <div class="drawer-links">
+            <a href="#download" class="drawer-link">How It Works</a>
+            <a href="#why" class="drawer-link">Features</a>
+            <a href="#faq" class="drawer-link">FAQ</a>
+        </div>
+        <button id="theme-toggle-mobile" type="button" class="theme-toggle" aria-label="Toggle theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+        </button>
+    </aside>
 
     <main>
         <section class="hero">
@@ -970,11 +1085,17 @@
             const downloadNowBtn = document.getElementById("download-now-btn");
             const previewBtn = document.getElementById("preview-btn");
             const previewModal = document.getElementById("preview-modal");
-            const previewPlayer = document.getElementById("preview-player");
-            const previewClose = document.getElementById("preview-close");
-            const themeToggle = document.getElementById("theme-toggle");
-            const themeColorMeta = document.getElementById("theme-color-meta");
-            let pollTimer = null;
+        const previewPlayer = document.getElementById("preview-player");
+        const previewClose = document.getElementById("preview-close");
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+        const menuToggle = document.getElementById("menu-toggle");
+        const drawer = document.getElementById("mobile-drawer");
+        const drawerClose = document.getElementById("drawer-close");
+        const drawerBackdrop = document.getElementById("mobile-backdrop");
+        const drawerLinks = document.querySelectorAll(".drawer-link");
+        const themeColorMeta = document.getElementById("theme-color-meta");
+        let pollTimer = null;
             let currentMediaUrl = "";
             let currentTaskId = null;
 
@@ -1136,17 +1257,42 @@
                 }
             });
 
-            if (themeToggle) {
-                themeToggle.addEventListener("click", () => {
-                    const current = document.documentElement.getAttribute("data-theme") || "dark";
-                    const next = current === "dark" ? "light" : "dark";
-                    document.documentElement.setAttribute("data-theme", next);
-                    localStorage.setItem("reelstack-theme", next);
-                    setThemeColor(next);
-                });
+        if (themeToggle) {
+            const toggleTheme = () => {
+                const current = document.documentElement.getAttribute("data-theme") || "dark";
+                const next = current === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", next);
+                localStorage.setItem("reelstack-theme", next);
+                setThemeColor(next);
+            };
+            themeToggle.addEventListener("click", toggleTheme);
+            if (themeToggleMobile) {
+                themeToggleMobile.addEventListener("click", toggleTheme);
             }
-        })();
-    </script>
+        }
+
+        const openDrawer = () => {
+            if (!drawer || !drawerBackdrop) return;
+            drawer.classList.add("open");
+            drawerBackdrop.classList.add("show");
+            drawer.setAttribute("aria-hidden", "false");
+        };
+
+        const closeDrawer = () => {
+            if (!drawer || !drawerBackdrop) return;
+            drawer.classList.remove("open");
+            drawerBackdrop.classList.remove("show");
+            drawer.setAttribute("aria-hidden", "true");
+        };
+
+        if (menuToggle) menuToggle.addEventListener("click", openDrawer);
+        if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
+        if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeDrawer);
+        if (drawerLinks.length) {
+            drawerLinks.forEach((link) => link.addEventListener("click", closeDrawer));
+        }
+    })();
+</script>
 
 </body>
 
