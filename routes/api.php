@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/healthz', function () {
+    return response()->json(['ok' => true], 200);
+});
+
 Route::post('/downloads', [DownloadTaskController::class, 'store'])->middleware('throttle:downloads');
 Route::get('/downloads/{downloadTask}', [DownloadTaskController::class, 'show']);
 Route::get('/downloads/{downloadTask}/file', [DownloadTaskController::class, 'file']);
