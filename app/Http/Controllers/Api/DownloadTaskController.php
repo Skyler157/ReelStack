@@ -9,6 +9,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,12 @@ class DownloadTaskController extends Controller
 
             ProcessDownloadTask::dispatch($task->id);
         } catch (Throwable $e) {
+            Log::error('Download task start failed', [
+                'url' => $validated['url'] ?? null,
+                'ip' => $request->ip(),
+                'error' => $e->getMessage(),
+            ]);
+
             return response()->json([
                 'message' => 'Could not start download task.',
                 'error' => $e->getMessage(),

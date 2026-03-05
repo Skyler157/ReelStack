@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class ProcessDownloadTask implements ShouldQueue
@@ -60,6 +61,13 @@ class ProcessDownloadTask implements ShouldQueue
                 'status' => 'failed',
                 'error_message' => $e->getMessage(),
             ]);
+
+            Log::error('Download task processing failed', [
+                'task_id' => $task->id,
+                'source_url' => $task->source_url,
+                'error' => $e->getMessage(),
+            ]);
+
             if (config('queue.default') !== 'sync') {
                 throw $e;
             }

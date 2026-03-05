@@ -1090,13 +1090,15 @@
                         })
                     });
 
-                    const data = await response.json();
-                    if (!response.ok) {
-                        setLoading(false);
-                        const msg = data.message || "Request failed.";
-                        setError(msg);
-                        return;
-                    }
+                const data = await response.json();
+                if (!response.ok) {
+                    setLoading(false);
+                    const msg = data.error
+                        ? `${data.message || "Request failed."} (${data.error})`
+                        : (data.message || "Request failed.");
+                    setError(msg);
+                    return;
+                }
 
                     pollTask(data.id);
                 } catch (error) {
