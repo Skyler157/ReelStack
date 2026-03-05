@@ -20,7 +20,14 @@ class DownloadTaskController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'url' => ['required', 'url', 'max:2048'],
+            'url' => [
+                'required',
+                'url',
+                'max:2048',
+                'regex:/^https:\/\/(www\.)?instagram\.com\/.+/i',
+            ],
+        ], [
+            'url.regex' => 'Please enter a valid Instagram URL (https://instagram.com/...).',
         ]);
 
         try {
@@ -41,7 +48,6 @@ class DownloadTaskController extends Controller
 
             return response()->json([
                 'message' => 'Could not start download task.',
-                'error' => $e->getMessage(),
             ], 500);
         }
 

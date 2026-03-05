@@ -1093,9 +1093,7 @@
                 const data = await response.json();
                 if (!response.ok) {
                     setLoading(false);
-                    const msg = data.error
-                        ? `${data.message || "Request failed."} (${data.error})`
-                        : (data.message || "Request failed.");
+                    const msg = data.message || "Request failed.";
                     setError(msg);
                     return;
                 }
