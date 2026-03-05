@@ -10,12 +10,18 @@ RUN apk add --no-cache \
     unzip \
     libzip-dev \
     oniguruma-dev \
-    && docker-php-ext-install pdo pdo_mysql bcmath pcntl
+    postgresql-dev \
+    && docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    bcmath \
+    pcntl
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy app source (artisan must exist before composer scripts run)
+# Copy app source
 COPY . .
 
 # Install PHP dependencies
