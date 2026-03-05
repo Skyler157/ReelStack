@@ -60,8 +60,9 @@ class ProcessDownloadTask implements ShouldQueue
                 'status' => 'failed',
                 'error_message' => $e->getMessage(),
             ]);
-
-            throw $e;
+            if (config('queue.default') !== 'sync') {
+                throw $e;
+            }
         }
     }
 

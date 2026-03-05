@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class DownloadTaskController extends Controller
 {
@@ -21,14 +22,21 @@ class DownloadTaskController extends Controller
             'url' => ['required', 'url', 'max:2048'],
         ]);
 
-        $task = DownloadTask::create([
-            'source_url' => $validated['url'],
-            'status' => 'queued',
-            'provider' => 'apify',
-            'requested_ip' => $request->ip(),
-        ]);
+        try {
+            $task = DownloadTask::create([
+                'source_url' => $validated['url'],
+                'status' => 'queued',
+                'provider' => 'apify',
+                'requested_ip' => $request->ip(),
+            ]);
 
-        ProcessDownloadTask::dispatch($task->id);
+            ProcessDownloadTask::dispatch($task->id);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => 'Could not start download task.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
 
         return response()->json([
             'id' => $task->id,
