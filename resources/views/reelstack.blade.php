@@ -662,7 +662,10 @@
         @media (max-width: 700px) {
             .nav {
                 height: auto;
-                padding: 0.75rem 0;
+                padding: 0.7rem 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
             }
 
             .brand {
@@ -670,11 +673,10 @@
             }
 
             .nav-links {
-                gap: 0.6rem;
-            }
-
-            .nav-links a {
-                display: none;
+                width: 100%;
+                gap: 0.55rem;
+                flex-wrap: wrap;
+                justify-content: flex-start;
             }
 
             .download-form {
